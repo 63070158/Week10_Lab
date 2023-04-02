@@ -29,10 +29,11 @@ pipeline {
             steps {
                 echo "Login: Logging in..."
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD']]) {
-                    bat "docker login -u \${DOCKERHUB_USERNAME} -p \${DOCKERHUB_PASSWORD} dckr_pat_oR-oMV0G651OzkdvdMJALu7U2n0"
+                    bat "echo \${DOCKERHUB_PASSWORD} | docker login -u \${DOCKERHUB_USERNAME} --password-stdin dckr_pat_oR-oMV0G651OzkdvdMJALu7U2n0"
                 }
             }
         }
+
 
 
         stage('Push Stage') {
